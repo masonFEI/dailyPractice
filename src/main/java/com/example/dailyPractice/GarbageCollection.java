@@ -6,6 +6,7 @@ package com.example.dailyPractice;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -55,31 +56,27 @@ public class GarbageCollection {
 
     //    请你返回收拾完所有垃圾需要花费的 最少 总分钟数。
     public static int garbageCollection(String[] garbage, int[] travel) {
-        final int[] res = {0};
-
-        // 每种垃圾最远的位置，以及每种垃圾的个数，然后用到达最远城市的时间+垃圾的个数即可
-        Map<String, Integer> gCItyMap = new HashMap<>();
-        Map<String, Integer> gCount = new HashMap<>();
+        int lettersTime = 0;
+        int travelTime = 0;
+        Map<String, Integer> travelTimeMap = new HashMap<>();
 
         for (int i = 0; i < garbage.length; i++) {
+            lettersTime += garbage[i].length();
+
+            if (i > 0) {
+                travelTime += travel[i - 1];
+            }
+
             int gItemSize = garbage[i].length();
             for (int j = 0; j < gItemSize; j++) {
                 String letterItem = garbage[i].substring(j, j + 1);
-                gCItyMap.put(letterItem, i);
-                gCount.put(letterItem, gCount.getOrDefault(letterItem, 0) + 1);
+                travelTimeMap.put(letterItem, travelTime);
             }
         }
 
-        gCItyMap.forEach((letter, cityNum) -> {
-            res[0] += gCount.get(letter);
-            if (cityNum != 0) {
-                for (int i = 0; i < cityNum; i++) {
-                    res[0] += travel[i];
-                }
-            }
-        });
+        Optional<Integer> reduce = travelTimeMap.values().stream().reduce(Integer::sum);
 
-        return res[0];
+        return lettersTime + reduce.get();
     }
 
 
