@@ -28,30 +28,16 @@ public class FindWinners {
     }
 
     /**
-     * 哈希表+排序
+     * 2225 哈希表+排序
      * @param matches
      * @return
      */
 
     public static List<List<Integer>> findWinners(int[][] matches) {
-        Map<Integer, Integer> lossCount = new HashMap<>();
-        for (int[] m : matches) {
-            if (!lossCount.containsKey(m[0])) {
-                lossCount.put(m[0], 0);
-            }
-            lossCount.merge(m[1], 1, Integer::sum);
-        }
+
 
         List<List<Integer>> ans = List.of(new ArrayList<>(), new ArrayList<>());
-        for (Map.Entry<Integer, Integer> e : lossCount.entrySet()) {
-            int cnt = e.getValue();
-            if (cnt < 2) {
-                ans.get(cnt).add(e.getKey());
-            }
-        }
 
-        Collections.sort(ans.get(0));
-        Collections.sort(ans.get(1));
         return ans;
 
     }
