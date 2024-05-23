@@ -5,8 +5,6 @@
 package com.example.dailyPractice;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * FindWinners
@@ -29,15 +27,49 @@ public class FindWinners {
 
     /**
      * 2225 哈希表+排序
+     *
      * @param matches
      * @return
      */
 
     public static List<List<Integer>> findWinners(int[][] matches) {
 
+        // 失败次数统计
+        Map<Integer, Integer> looseTimeMap = new HashMap<>();
 
-        List<List<Integer>> ans = List.of(new ArrayList<>(), new ArrayList<>());
+        for (int i = 0; i < matches.length; i++) {
 
+            int winner = matches[i][0];
+            int looser = matches[i][1];
+
+            if (!looseTimeMap.containsKey(winner)) {
+                looseTimeMap.put(winner, 0);
+            }
+
+            if (looseTimeMap.containsKey(looser)) {
+                looseTimeMap.put(looser, looseTimeMap.get(looser) + 1);
+            } else {
+                looseTimeMap.put(looser, 1);
+            }
+
+        }
+        List<Integer> zeroLose = new ArrayList<>();
+        List<Integer> oneLose = new ArrayList<>();
+
+        looseTimeMap.forEach((k, v) -> {
+            if (v == 0) {
+                zeroLose.add(k);
+            } else if (v == 1) {
+                oneLose.add(k);
+            }
+        });
+
+        Collections.sort(zeroLose);
+        Collections.sort(oneLose);
+
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(zeroLose);
+        ans.add(oneLose);
         return ans;
 
     }
