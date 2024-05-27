@@ -29,7 +29,7 @@ public class MostCompetitive {
     //输出：[2,3,3,1]
 
     //输入：nums = [2,4,1,3,3,5,1,9,6,1], k = 4
-    //输出：[1,3,3,1]
+    //输出：[1,1,6,1]
 
     public static void main(String[] args) {
 
