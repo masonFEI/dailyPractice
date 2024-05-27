@@ -46,14 +46,18 @@ public class MissingRolls {
         int aizx = diff / n;
         int remainder = diff % n;
         int[] result = new int[n];
-        Arrays.fill(result, aizx);
 
         if (remainder > 0) {
             int addOneNum = diff - aizx * n;
-
-            for (int i = 0; i < addOneNum; i++) {
-                result[i] = aizx + 1;
+            for (int i = 0; i < n; i++) {
+                if (i < addOneNum) {
+                    result[i] = aizx + 1;
+                } else {
+                    result[i] = aizx;
+                }
             }
+        } else {
+            Arrays.fill(result, aizx);
         }
 
         return result;
