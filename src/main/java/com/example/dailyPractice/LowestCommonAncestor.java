@@ -17,7 +17,6 @@ public class LowestCommonAncestor {
     public static TreeNode resNode;
 
 
-
 //    root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8
 
     public static void main(String[] args) {
@@ -74,12 +73,19 @@ public class LowestCommonAncestor {
             resNode = root;
             return 3;
         } else {
-            if (root.val == p.val) {
-                return 1;
-            } else if (root.val == q.val) {
-                return 2;
+
+            if (leftRes != 0) {
+                return leftRes;
+            } else if (rightRes != 0) {
+                return rightRes;
             } else {
-                return 0;
+                if (root.val == p.val) {
+                    return 1;
+                } else if (root.val == q.val) {
+                    return 2;
+                } else {
+                    return 0;
+                }
             }
         }
 
