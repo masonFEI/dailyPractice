@@ -41,7 +41,6 @@ public class MaximumLength {
         char[] charArray = s.toCharArray();
         Map<String, Integer> diffLengthCountMap = new HashMap<>();
         while (diffLength > 0) {
-
             while (right < totalLength) {
                 int index = left;
                 boolean isSpecial = true;
