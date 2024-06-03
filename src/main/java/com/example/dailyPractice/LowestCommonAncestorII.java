@@ -14,15 +14,27 @@ package com.example.dailyPractice;
 public class LowestCommonAncestorII {
 
 
-    public TreeNode resNode;
+    public static TreeNode resNode;
 
 
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    public static void main(String[] args) {
+
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+
+        TreeNode p = new TreeNode(1);
+        TreeNode q = new TreeNode(2);
+
+        lowestCommonAncestor(root, p, q);
+    }
+
+
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         backSort(root, p, q);
         return resNode;
     }
 
-    public int backSort(TreeNode root, TreeNode p, TreeNode q) {
+    public static int backSort(TreeNode root, TreeNode p, TreeNode q) {
         int leftRes = 0;
         int rightRes = 0;
         if (root.left != null) {
@@ -36,8 +48,7 @@ public class LowestCommonAncestorII {
             return 3;
         }
 
-
-        if ((leftRes == 1 && rightRes == 2) || (leftRes == 1 && root.val == q.val) || (rightRes == 2 && root.val == p.val)) {
+        if ((leftRes == 1 && rightRes == 2) || (leftRes == 2 && rightRes == 1) || ((leftRes == 1 || rightRes == 1) && root.val == q.val) || ((leftRes == 2 || rightRes == 2) && root.val == p.val)) {
             resNode = root;
             return 3;
         } else {
