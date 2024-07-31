@@ -1,13 +1,14 @@
 package com.example.dailyPractice;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class MinRectanglesToCoverPoints {
 
 
 
     public int minRectanglesToCoverPoints(int[][] points, int w) {
-        Arrays.sort(points, (p, q) -> p[0] - q[0]);
+        Arrays.sort(points, Comparator.comparingInt(p -> p[0]));
         int ans = 0;
         int x2 = -1;
         for (int[] p : points) {
